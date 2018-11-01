@@ -82,9 +82,15 @@ window.addEventListener('DOMContentLoaded', function(){
                 statusMessage.innerHTML = message.fail;
             }
         });
+        
         for (let i = 0; i < input.length; i++){
             input[i].value = '';
-        }
+        }        
+    });
+    input[1].addEventListener('keypress', function(event) {
+        if(!/\d/.test(event.key)){
+            event.preventDefault();
+        } 
     });
 });
     
