@@ -11,11 +11,11 @@ window.addEventListener('DOMContentLoaded', function(){
         popupEngineer.classList.add('fadeIn');  
         
     });
-
-    popupEngineer.addEventListener('click', function(){
-        popupEngineer.style.display = 'none';
+    popupEngineer.addEventListener('click', function(event){
+        if (event.target && event.target.classList.contains('popup_engineer')) {
+            popupEngineer.style.display = 'none';
+        } 
     });
-
     closeEngineer.addEventListener('click', function(){
         popupEngineer.style.display = 'none';
     });
@@ -33,12 +33,14 @@ window.addEventListener('DOMContentLoaded', function(){
             });
         }
 
-        popup.addEventListener('click', function(){
+    popup.addEventListener('click', function(event){
+        if (event.target && event.target.classList.contains('popup')) {
             popup.style.display = 'none';
-        });
-        closePopup.addEventListener('click', function(){
-            popup.style.display = 'none';
-        });
+        } 
+    });
+    closePopup.addEventListener('click', function(){
+        popup.style.display = 'none';
+    });
 
     // Form
 
