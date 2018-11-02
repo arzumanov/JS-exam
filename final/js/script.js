@@ -96,7 +96,6 @@ window.addEventListener('DOMContentLoaded', function(){
     });
 
     // Tab
-
     let glazingTab = document.querySelectorAll('.glazing_tab'),
         glazingBlock = document.querySelector('.glazing_slider'),
         glazingContent = document.querySelectorAll('.glazing_content');
@@ -131,6 +130,55 @@ window.addEventListener('DOMContentLoaded', function(){
             }
         }
     });
+    // Tab 2
+
+    let decorationTab = document.querySelectorAll('.decoration_link'),
+        decorationItem = document.querySelectorAll('.decor_decor'),
+        decorationSlider = document.querySelector('.decoration_slider'),
+        decorationContent = document.querySelectorAll('.decoration_cont');
+
+        function hideDecoration(a) {
+            for (let i = a; i < decorationContent.length; i++) {
+                decorationContent[i].classList.remove('show');
+                decorationContent[i].classList.add('hide');
+                decorationItem[i].classList.remove('after_click');
+            }
+        }
+        hideDecoration(1);
+    
+        function showDecoration(b) {
+            if (decorationContent[b].classList.contains('hide')) {
+                decorationContent[b].classList.remove('hide');
+                decorationContent[b].classList.add('show');
+                decorationItem[b].classList.add('after_click');
+            }
+        }
+
+        decorationSlider.addEventListener('click', function(event){
+                let target = event.target;
+                if (target && target.classList.contains('decor_decor')){
+                    for (let i = 0; i < decorationItem.length; i++) {
+                        if (target == decorationItem[i]) {
+                            hideDecoration(0);
+                            showDecoration(i);                        
+                            break;
+                        }
+                    }
+                }
+            });   
+
+        decorationSlider.addEventListener('click', function(event){
+            let target = event.target;
+            if (target && target.classList.contains('decoration_link')){
+                for (let i = 0; i < decorationTab.length; i++) {
+                    if (target == decorationTab[i]) {
+                        hideDecoration(0);
+                        showDecoration(i);                        
+                        break;
+                    }
+                }
+            }
+        });   
 });
     
     

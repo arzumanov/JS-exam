@@ -504,9 +504,17 @@ textarea:focus {
   font-style: normal;
   color: #000000;
 }
-.decoration .external,
+/* .decoration .external,
 .decoration .rising,
 .decoration .roof {
+  display: none;
+} */
+
+.decoration_cont .show {
+  display: block;
+}
+
+.decoration_cont .hide {
   display: none;
 }
 /*Our works*/
