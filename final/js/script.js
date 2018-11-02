@@ -94,6 +94,43 @@ window.addEventListener('DOMContentLoaded', function(){
             event.preventDefault();
         } 
     });
+
+    // Tab
+
+    let glazingTab = document.querySelectorAll('.glazing_tab'),
+        glazingBlock = document.querySelector('.glazing_slider'),
+        glazingContent = document.querySelectorAll('.glazing_content');
+
+    function hideContent(a) {
+        for (let i = a; i < glazingContent.length; i++) {
+            glazingContent[i].classList.remove('show');
+            glazingContent[i].classList.add('hide');
+            glazingTab[i].classList.remove('active');
+        }
+    }
+    hideContent(1);
+
+    function showContent(b) {
+        if (glazingContent[b].classList.contains('hide')) {
+            glazingContent[b].classList.remove('hide');
+            glazingContent[b].classList.add('show');
+            glazingTab[b].classList.add('active');
+        }
+    }
+
+    glazingBlock.addEventListener('click', function(event){
+        let target = event.target;
+        if (target && target.classList.contains('glazing_tab')){
+            for (let i = 0; i < glazingTab.length; i++) {
+                if (target == glazingTab[i]) {
+                    hideContent(0);
+                    showContent(i);
+                    
+                    break;
+                }
+            }
+        }
+    });
 });
     
     
