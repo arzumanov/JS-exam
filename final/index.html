@@ -849,10 +849,10 @@
                   <img src="img/modal_calc/balkon/type3.png" alt="" id="type3" class="balconbig_img" >
                   <img src="img/modal_calc/balkon/type4.png" alt="" id="type4" class="balconbig_img" >
                 </div>
-                <input class="form-control" id="width" type="text" placeholder="Ширина" required>
+                <input class="form-control" id="width" type="tel" placeholder="Ширина" required>
                 <label for="width">мм</label>
                 <div class="multiplication"><strong>&times;</strong></div>
-                <input class="form-control" id="height" type="text" placeholder="Высота" required>
+                <input class="form-control" id="height" type="tel" placeholder="Высота" required>
                 <label for="height">мм</label>
                 <button class="button popup_calc_button">Далее</button>
             </div>
@@ -895,11 +895,11 @@
             <div class="popup_content text-center">
                 <button type="button" class="popup_calc_end_close"><strong>&times;</strong></button>
                 <div class="popup_form">
-                    <form class="form" action="#">
+                    <form class="form" action="#" id="popup_calc_form" >
                       <h2>Спасибо за обращение! <br>Оставьте свои данные</h2>
                         <input class="form-control form_input" name="user_name" required type="text" placeholder="Введите ваше имя">
                         <input class="form-control form_input" name="user_phone" required type="tel" placeholder="Введите телефон">
-                        <button class="text-uppercase btn-block button" name="submit" type="submit">Рассчитать стоимость</button>
+                        <button class="text-uppercase btn-block button" name="submit" type="submit" id="sum">Рассчитать стоимость</button>
                         <p class="form_notice">Перезвоним в течение 10 минут</p>
                     </form>
                 </div>
