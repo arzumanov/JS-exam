@@ -894,6 +894,9 @@ textarea:focus {
   padding: 1rem 5rem;
 }
 
+.showb {
+  display: inline-block !important;
+}
 /*Media*/
 @media (max-width: 1400px) {
   .main {
