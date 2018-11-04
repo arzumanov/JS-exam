@@ -604,6 +604,38 @@ textarea:focus {
 .sale .eTimer {
   text-align: center;
 }
+/* Timer */
+.timer {
+  background-color: rgba(255, 255, 255, 0.6);
+  text-align: center;
+  border-radius: 10px;
+}
+.timer-block {
+  padding: 10px;
+}
+.timer-title {
+  text-transform: uppercase;
+  font-size: 24px;
+  margin-bottom: 15px;
+  padding-top: 15px;
+}
+.timer-value {
+  display: inline-block;
+  margin-right: 10px;
+}
+.timer-value_v {
+  color: #fff;
+  background-color: #333333;
+  font-size: 50px;
+  padding: 5px;
+  border-radius: 10px;
+}
+.timer-value_t {
+  color: #333333;
+  font-size: 18px;
+  font-weight: 900;
+  margin-top: 10px;
+}
 /*Contacts*/
 .contacts {
   padding: 6rem 0;
