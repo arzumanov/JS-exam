@@ -61,7 +61,7 @@ window.addEventListener('DOMContentLoaded', function(){
     }
     function mask(input) {
     input.addEventListener('input', function() {
-        input.value = input.value.replace(/[^0-9+() ]/ig, '');
+        input.value = input.value.replace(/[^0-9]/ig, '');
         });
     }
 
@@ -359,25 +359,25 @@ window.addEventListener('DOMContentLoaded', function(){
         };
                     
         popupBtnCalc.addEventListener('click', function(){
-            formData.append('Ширина: ', inputWidth.value);
-            formData.append('Высота: ', inputHeight.value);
+            formData.append('Width: ', inputWidth.value);
+            formData.append('Height: ', inputHeight.value);
         });
 
         popupCalcBtn.addEventListener('click', function(){
             if(popupCheck[0].checked === true) {
-                formData.append('Остекление - ', 'Холодное');
+                formData.append('Glazing - ', 'Cold');
             } else if (popupCheck[1].checked === true) {
-                formData.append('Остекление - ', 'Теплое');
+                formData.append('Glazing - ', 'Warm');
             }
         });
 
         sum.addEventListener('click', function(){
-            formData.append("Имя ", popupCalcFormInput[0].value);
-            formData.append("Телефон ", popupCalcFormInput[1].value);
+            formData.append("Name ", popupCalcFormInput[0].value);
+            formData.append("Phone ", popupCalcFormInput[1].value);
         });
 
         selectType.addEventListener('change', function(){
-            formData.append("Тип остекления ", this.options[this.selectedIndex].innerHTML);
+            formData.append("Glazing type ", this.options[this.selectedIndex].innerHTML);
         });
 
         // Send form for calc_end
@@ -450,7 +450,7 @@ window.addEventListener('DOMContentLoaded', function(){
             // hours = Math.floor((t/(1000*60*60))),
             hours = Math.floor((t/(1000*60*60) % 24)),
             days = Math.floor(t/(1000*60*60*24));
-
+        
             return {
                 'total': t,
                 'hours': hours,
