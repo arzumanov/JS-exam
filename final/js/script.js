@@ -123,7 +123,8 @@ window.addEventListener('DOMContentLoaded', function(){
 
     // Tab
     let glazingTab = document.querySelectorAll('.glazing_tab'),
-        glazingBlock = document.querySelector('.glazing_slider'),
+        glazingSlider = document.querySelector('.glazing_slider'),
+        glazingBlock = document.querySelectorAll('.glazing_block'),
         glazingContent = document.querySelectorAll('.glazing_content');
 
     function hideContent(a) {
@@ -143,7 +144,7 @@ window.addEventListener('DOMContentLoaded', function(){
         }
     }
 
-    glazingBlock.addEventListener('click', function(event){
+    glazingSlider.addEventListener('click', function(event){
         let target = event.target;
         if (target && target.classList.contains('glazing_tab')){
             for (let i = 0; i < glazingTab.length; i++) {
@@ -155,6 +156,8 @@ window.addEventListener('DOMContentLoaded', function(){
             }
         }
     });
+    
+    
     
     // Tab 2
 
@@ -280,7 +283,7 @@ window.addEventListener('DOMContentLoaded', function(){
             function checkInput() {
             
                 setInterval(function () {
-                if (inputWidth.value == '' || inputHeight.value == '') {
+                if (inputWidth.value == '' || inputHeight.value == '' || inputWidth.value == 0 || inputHeight.value == 0) {
                     popupBtnCalc.setAttribute('disabled', 'true');
                 } else {
                     popupBtnCalc.removeAttribute('disabled', 'true');
@@ -486,30 +489,44 @@ window.addEventListener('DOMContentLoaded', function(){
     setClock('timer', deadline);
 
     // Images
-    let minImg = document.querySelectorAll('.ourworks_min_img'),
-        works = document.querySelector('.works'),
-        overlayImg = document.createElement('div'),
-        bigImg = document.createElement('div');
-       
-        bigImg.src = './img/our_works/big_img/1.png';
-        
-        for (let i = 0; i < minImg.length; i++) {
-            minImg[i].addEventListener('click', function(){
-                works.appendChild(overlayImg);
-                overlayImg.appendChild(bigImg);                
-                overlayImg.style.display = 'block';
-                overlayImg.classList.add('overlay_img');                
-                
-            });
-        }
-        
-        
-            
-        
-        
-       
 
-    
+    // let minImg = document.querySelectorAll('.ourworks_min_img'),
+    //     works = document.querySelector('.works'),
+    //     overlayImg = document.createElement('div'),
+    //     bigImg = document.createElement('div');
+       
+    //     for (let i = 0; i < minImg.length; i++) {
+    //         minImg[i].addEventListener('click', function(){
+    //             works.appendChild(overlayImg);
+    //             overlayImg.appendChild(bigImg);
+    //             bigImg.innerHTML = '<img src="img/our_works/big_img/1.png" alt="">';                  
+    //             overlayImg.style.display = 'block';
+    //             overlayImg.classList.add('overlay_img');           
+    //         });
+    //     }         
+
+    let overlayImg = document.createElement('div'),
+        bigImg = document.createElement('img'),
+        minImg = document.querySelectorAll('.ourworks_min_img');
+
+        overlayImg.classList.add('overlay_img');
+        bigImg.classList.add('big_img');
+        document.body.appendChild(overlayImg);
+        overlayImg.appendChild(bigImg);
+
+
+    minImg.forEach(function(item){
+        item.addEventListener('click', function(event){
+            event.preventDefault();
+            overlayImg.style.display = 'flex';
+            bigImg.src = this.href;     
+        });
+    });
+        overlayImg.addEventListener('click', function (event) {
+            if(event.target && event.target.classList.contains('overlay_img')){
+                overlayImg.style.display = 'none';
+            }
+        });
 });
 
    
