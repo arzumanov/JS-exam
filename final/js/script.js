@@ -275,6 +275,20 @@ window.addEventListener('DOMContentLoaded', function(){
             popupCalcEnd = document.querySelector('.popup_calc_end'),
             popupCaclEndClose = document.querySelector('.popup_calc_end_close');
 
+            // Проверка пустых полей ширины и высоты
+            function checkInput() {
+            
+                setInterval(function () {
+                if (inputWidth.value == '' || inputHeight.value == '') {
+                    popupBtnCalc.setAttribute('disabled', 'true');
+                } else {
+                    popupBtnCalc.removeAttribute('disabled', 'true');
+                }
+    
+                }, 0);
+            }
+            checkInput();
+            
             popupBtnCalc.addEventListener('click', function(){
                 popupCalc.style.display ='none';
                 popupCalcProfile.style.display ='block';
@@ -432,8 +446,8 @@ window.addEventListener('DOMContentLoaded', function(){
         let t = Date.parse(endtime) - Date.parse(new Date()),
             seconds = Math.floor((t/1000)%60),
             minutes = Math.floor((t/1000/60)%60),
-            hours = Math.floor((t/(1000*60*60))),
-            // hours = Math.floor((t/(1000/60/60) % 24));
+            // hours = Math.floor((t/(1000*60*60))),
+            hours = Math.floor((t/(1000*60*60) % 24)),
             days = Math.floor(t/(1000*60*60*24));
 
             return {
@@ -461,10 +475,40 @@ window.addEventListener('DOMContentLoaded', function(){
 
             if(t.total <= 0) {
                 clearInterval(timeInterval);
+                days.innerHTML = '00';
+                hours.innerHTML = '00';
+                minutes.innerHTML = '00';
+                seconds.innerHTML = '00';
             }
         }
     }
     setClock('timer', deadline);
+
+    // Images
+    let minImg = document.querySelectorAll('.ourworks_min_img'),
+        works = document.querySelector('.works'),
+        overlayImg = document.createElement('div'),
+        bigImg = document.createElement('div');
+       
+        bigImg.src = './img/our_works/big_img/1.png';
+        
+        for (let i = 0; i < minImg.length; i++) {
+            minImg[i].addEventListener('click', function(){
+                works.appendChild(overlayImg);
+                overlayImg.appendChild(bigImg);                
+                overlayImg.style.display = 'block';
+                overlayImg.classList.add('overlay_img');                
+                
+            });
+        }
+        
+        
+            
+        
+        
+       
+
+    
 });
 
    
