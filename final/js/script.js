@@ -155,6 +155,7 @@ window.addEventListener('DOMContentLoaded', function(){
             }
         }
     });
+    
     // Tab 2
 
     let decorationTab = document.querySelectorAll('.decoration_link'),
@@ -440,7 +441,7 @@ window.addEventListener('DOMContentLoaded', function(){
 
     // Timer
 
-    let deadline = '2019-07-04';
+    let deadline = '2019-11-05';
 
     function getTimeRemaining(endtime){
         let t = Date.parse(endtime) - Date.parse(new Date()),
