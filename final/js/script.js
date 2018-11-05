@@ -488,23 +488,7 @@ window.addEventListener('DOMContentLoaded', function(){
     }
     setClock('timer', deadline);
 
-    // Images
-
-    // let minImg = document.querySelectorAll('.ourworks_min_img'),
-    //     works = document.querySelector('.works'),
-    //     overlayImg = document.createElement('div'),
-    //     bigImg = document.createElement('div');
-       
-    //     for (let i = 0; i < minImg.length; i++) {
-    //         minImg[i].addEventListener('click', function(){
-    //             works.appendChild(overlayImg);
-    //             overlayImg.appendChild(bigImg);
-    //             bigImg.innerHTML = '<img src="img/our_works/big_img/1.png" alt="">';                  
-    //             overlayImg.style.display = 'block';
-    //             overlayImg.classList.add('overlay_img');           
-    //         });
-    //     }         
-
+    // Images zoom
     let overlayImg = document.createElement('div'),
         bigImg = document.createElement('img'),
         minImg = document.querySelectorAll('.ourworks_min_img');
@@ -515,13 +499,13 @@ window.addEventListener('DOMContentLoaded', function(){
         overlayImg.appendChild(bigImg);
 
 
-    minImg.forEach(function(item){
-        item.addEventListener('click', function(event){
-            event.preventDefault();
-            overlayImg.style.display = 'flex';
-            bigImg.src = this.href;     
+        minImg.forEach(function(item){
+            item.addEventListener('click', function(event){
+                event.preventDefault();
+                overlayImg.style.display = 'flex';
+                bigImg.src = this.href;     
+            });
         });
-    });
         overlayImg.addEventListener('click', function (event) {
             if(event.target && event.target.classList.contains('overlay_img')){
                 overlayImg.style.display = 'none';
