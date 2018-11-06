@@ -27,6 +27,7 @@ window.addEventListener('DOMContentLoaded', function(){
 
         for (let i = 0; i < phoneLink.length; i++) {
             phoneLink[i].addEventListener('click', function(){
+                event.preventDefault();
                 popup.style.display = 'block';
                 popup.classList.add('animated');
                 popup.classList.add('fadeIn');
@@ -271,9 +272,10 @@ window.addEventListener('DOMContentLoaded', function(){
             // Проверка пустых полей ширины и высоты
             
                 popupBtnCalc.addEventListener('click', function () {                
-                    
-                    if (inputWidth.value == '' || inputHeight.value == '' || inputWidth.value == 0 || inputHeight.value == 0) {
-                        alert('Введите ширину и высоту!');
+                    let typeForm = document.querySelector('.typeform');
+
+                    if (inputWidth.value == '' || inputHeight.value == '' || inputWidth.value == 0 || inputHeight.value == 0 || typeForm == null) {
+                        alert('Выберите тип и введите ширину и высоту!');
                     } else {
                         popupCalc.style.display ='none';
                         popupCalcProfile.style.display ='block';
@@ -355,21 +357,19 @@ window.addEventListener('DOMContentLoaded', function(){
         });
 
         popupCalcBtn.addEventListener('click', function(){
+
             if(popupCheck[0].checked === true) {
                 formDate.append('Glazing: ', 'Cold');
             } else if (popupCheck[1].checked === true) {
                 formDate.append('Glazing: ', 'Warm');
             }
+            formDate.append('Glazing type: ', selectType.value);
         });
 
         sum.addEventListener('click', function(){
             formDate.append('Name: ', popupCalcFormInput[0].value);
             formDate.append('Phone:', popupCalcFormInput[1].value);
-        });
-
-        selectType.addEventListener('change', function(){
-            formDate.append('Glazing type: ', this.options[this.selectedIndex].innerHTML);
-        });
+        });        
 
         // Send form for calc_end
 
@@ -462,7 +462,7 @@ window.addEventListener('DOMContentLoaded', function(){
             hours.textContent = ('0' + t.hours).slice(-2);
             minutes.textContent = ('0' + t.minutes).slice(-2);
             seconds.textContent = ('0' + t.seconds).slice(-2);
-            days.textContent = ('0' + t.days).slice(-2);
+            days.textContent = ('0' + t.days).slice(-3);
 
             if(t.total <= 0) {
                 clearInterval(timeInterval);
