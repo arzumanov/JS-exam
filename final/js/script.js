@@ -230,7 +230,9 @@ window.addEventListener('DOMContentLoaded', function(){
             for (let i = a; i < balconbigImg.length; i++) {
                 balconbigImg[i].classList.remove('showb');
                 balconbigImg[i].classList.add('hide');
+                balconImg[i].classList.remove('typeform');
                 balconImg[i].style.width = '20%';
+
             }
         }
         hideCalc(1);
@@ -239,6 +241,7 @@ window.addEventListener('DOMContentLoaded', function(){
             if (balconbigImg[b].classList.contains('hide')) {
                 balconbigImg[b].classList.remove('hide');
                 balconbigImg[b].classList.add('showb');
+                balconImg[b].classList.add('typeform');
                 balconImg[b].style.width = '30%';
             }
         }
@@ -344,8 +347,11 @@ window.addEventListener('DOMContentLoaded', function(){
         };
                     
         popupBtnCalc.addEventListener('click', function(){
+            let typeForm = document.querySelector('.typeform');
+            
             formDate.append('Width: ', inputWidth.value);
             formDate.append('Height: ', inputHeight.value);
+            formDate.append('Type: ', typeForm.alt);
         });
 
         popupCalcBtn.addEventListener('click', function(){
