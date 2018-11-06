@@ -45,83 +45,71 @@ window.addEventListener('DOMContentLoaded', function(){
     
     // Form
 
-    let message = {
-        loading: 'Идет отправка...',
-        success: 'Отправлено!',
-        fail: 'Ошибка!'
-    };
+    let forms = document.querySelectorAll('.form'),
+        statusMessage = document.createElement('div'),
+        phoneInputs = document.querySelectorAll('input[type="tel"]'),
+        message = {
+            loading: 'Идет отправка...',
+            success: 'Отправлено!',
+            failure: 'Ошибка!'
+        };
 
-    let form = document.querySelectorAll('.form'),
-    statusMessage = document.createElement('div'),
-    phoneInputs = document.querySelectorAll('input[type="tel"]');
-
-  
-    for (let i = 0; i < phoneInputs.length; i++) {
-        mask(phoneInputs[i]);
-    }
-    function mask(input) {
-    input.addEventListener('input', function() {
-        input.value = input.value.replace(/[^0-9]/ig, '');
-        });
-    }
-
-    for (let i = 0; i < form.length; i++) {
-    sendForm(form[i]);
-    }
-
-    function sendForm(elem) {
-    elem.addEventListener('submit', function (event) {
-        event.preventDefault();
-        elem.appendChild(statusMessage);
-        let inputs = elem.getElementsByTagName('input');
-        elem.appendChild(statusMessage);
-        let formData = new FormData(elem);
-
-        function postData(data) {
-        return new Promise(function (resolve, reject) {
-            let request = new XMLHttpRequest();
-            request.open("POST", '../server.php');
-            request.setRequestHeader('Content-type', 'application/json; charset=utf-8');
-
-            let obj = {};
-            formData.forEach(function(value, key) {
-                obj[key] = value;
+        for (let i = 0; i < phoneInputs.length; i++) {
+            mask(phoneInputs[i]);
+        }
+        function mask(input) {
+            input.addEventListener('input', function() {
+                input.value = input.value.replace(/[^0-9]/ig, '');
             });
-            let json = JSON.stringify(obj);
-
-            request.onreadystatechange = function () {
-                if (request.readyState < 4) {
-                    resolve();
-                } else if (request.readyState === 4 && request.status == 200) {
-                    if (request.status == 200 && request.status < 300) {
-                    resolve();
-                    } else {
-                    reject();
-                    }
-                }
-            };
-
-            request.send(json);
-        });
-        } 
-
-
-        function clearInput() {
-            for (let i = 0; i < inputs.length; i++) {
-                inputs[i].value = '';
-            }
         }
 
-        postData(formData)
-        .then(() => statusMessage.innerHtml = message.loading)
-        .then(() => statusMessage.innerHTML = message.success)
-        .catch(() => statusMessage.innerHTML = message.fail)
-        .then(clearInput);
-    });
-    }
+        forms.forEach(function (form) {
+            form.addEventListener('submit', function(event) {
+                event.preventDefault();
+                let input = form.querySelectorAll('input');
+                form.appendChild(statusMessage);
+                let formData = new FormData(form);
+
+            function postData(data) {
+                return new Promise(function(resolve, reject){
+                let request = new XMLHttpRequest();
+
+                    request.open("POST", "server.php");
+                    request.setRequestHeader("Content-Type", "application/json; charset=utf-8");
+
+                    request.onreadystatechange = function () {
+                        if (request.readyState < 4) {
+                            resolve();
+                        } else if (request.readyState === 4) {
+                            if (request.status == 200 && request.status < 300) {
+                                resolve();
+                        }
+                        } else {
+                            reject();
+                        }
+                    };
+                    request.send(data);
+                });
+            }
+            function clearInput() {
+                for (let i = 0; i < input.length; i++) {
+                    input[i].value = "";
+                }
+                setTimeout(function() {
+                    statusMessage.innerHTML = "";
+                }, 10000);
+            }
+
+            postData(formData)
+                .then(() => (statusMessage.innerHTML = message.loading))
+                .then(() => (statusMessage.innerHTML = message.success))
+                .catch(() => (statusMessage.innerHTML = message.failure))
+                .then(clearInput);
+            });
+        });
 
 
-    // Tab Надо исправить!!!!!!!!
+    // Glazing Tab
     let glazingBlock = document.querySelectorAll(".glazing_block"),
         glazingTab = document.querySelectorAll(".glazing_tab"),
         glazingImg = document.querySelectorAll(".glazing_block > img"),
@@ -362,19 +350,19 @@ window.addEventListener('DOMContentLoaded', function(){
 
         popupCalcBtn.addEventListener('click', function(){
             if(popupCheck[0].checked === true) {
-                formDate.append('Glazing - ', 'Cold');
+                formDate.append('Glazing: ', 'Cold');
             } else if (popupCheck[1].checked === true) {
-                formDate.append('Glazing - ', 'Warm');
+                formDate.append('Glazing: ', 'Warm');
             }
         });
 
         sum.addEventListener('click', function(){
-            formDate.append("Name ", popupCalcFormInput[0].value);
-            formDate.append("Phone ", popupCalcFormInput[1].value);
+            formDate.append('Name: ', popupCalcFormInput[0].value);
+            formDate.append('Phone:', popupCalcFormInput[1].value);
         });
 
         selectType.addEventListener('change', function(){
-            formDate.append("Glazing type ", this.options[this.selectedIndex].innerHTML);
+            formDate.append('Glazing type: ', this.options[this.selectedIndex].innerHTML);
         });
 
         // Send form for calc_end
@@ -438,7 +426,7 @@ window.addEventListener('DOMContentLoaded', function(){
 
     // Timer
 
-    let deadline = '2018-11-07';
+    let deadline = '2019-11-07';
 
     function getTimeRemaining(endtime){
         let newestData = new Date().getTimezoneOffset(),
