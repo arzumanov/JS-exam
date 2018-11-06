@@ -33,6 +33,12 @@ textarea:focus {
   border-radius: 1rem;
   background-color: #ffffff;
 }
+.form_calc {
+  padding: 2rem 5rem;
+  text-align: center;
+  border-radius: 1rem;
+  background-color: #ffffff;
+}
 .form h2 {
   margin-bottom: 3rem;
   font-size: 2rem;
@@ -43,6 +49,19 @@ textarea:focus {
   line-height: 1.5;
 }
 .form h2 span {
+  font-size: 2.4rem;
+  text-transform: uppercase;
+}
+.form_calc h2 {
+  margin-bottom: 3rem;
+  font-size: 2rem;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 700;
+  font-style: normal;
+  color: #333333;
+  line-height: 1.5;
+}
+.form_calc h2 span {
   font-size: 2.4rem;
   text-transform: uppercase;
 }
@@ -414,12 +433,12 @@ textarea:focus {
 .glazing .rise {
   display: none;
 } */
-.glazing_content .hide {
+/* .glazing_content .hide {
   display: none;
 }
 .glazing_content .show {
   display: block;
-}
+} */
 .glazing a.active {
   text-decoration: none;
   color: #454545;
@@ -1495,10 +1514,12 @@ textarea:focus {
   .popup_calc_content .balcon_icons img {
     width: 20%;
   }
+  
   .popup_calc_content .big_img img {
     margin-bottom: 2rem;
     width: 25rem;
   }
+ 
   .popup_calc_content #type1 {
     display: inline-block;
   }

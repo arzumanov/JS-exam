@@ -121,43 +121,39 @@ window.addEventListener('DOMContentLoaded', function(){
     }
 
 
-    // Tab
-    let glazingTab = document.querySelectorAll('.glazing_tab'),
-        glazingSlider = document.querySelector('.glazing_slider'),
-        glazingBlock = document.querySelectorAll('.glazing_block'),
-        glazingContent = document.querySelectorAll('.glazing_content');
+    // Tab Надо исправить!!!!!!!!
+    let glazingBlock = document.querySelectorAll(".glazing_block"),
+        glazingTab = document.querySelectorAll(".glazing_tab"),
+        glazingImg = document.querySelectorAll(".glazing_block > img"),
+        glazingContent = document.querySelectorAll(".glazing_content");
 
-    function hideContent(a) {
+    function hideTabContent(a) {
         for (let i = a; i < glazingContent.length; i++) {
-            glazingContent[i].classList.remove('show');
-            glazingContent[i].classList.add('hide');
-            glazingTab[i].classList.remove('active');
+            glazingTab[i].classList.remove("active");
+            glazingContent[i].classList.remove("show");
+            glazingContent[i].classList.add("hide");
         }
     }
-    hideContent(1);
+    hideTabContent(1);
 
-    function showContent(b) {
-        if (glazingContent[b].classList.contains('hide')) {
-            glazingContent[b].classList.remove('hide');
-            glazingContent[b].classList.add('show');
-            glazingTab[b].classList.add('active');
-        }
+    function showTabContent(b) {
+        glazingTab[b].classList.add("active");
+        glazingContent[b].classList.add("show");
+        glazingContent[b].classList.remove("hide");
     }
 
-    glazingSlider.addEventListener('click', function(event){
-        let target = event.target;
-        if (target && target.classList.contains('glazing_tab')){
-            for (let i = 0; i < glazingTab.length; i++) {
-                if (target == glazingTab[i]) {
-                    hideContent(0);
-                    showContent(i);                    
+    glazingBlock.forEach(function(item, index) {
+        item.addEventListener("click", function(event) {
+            for (let i = 0; i < glazingBlock.length; i++) {
+                if (event.target && event.target == glazingTab[i] || event.target == glazingBlock[i] || event.target == glazingImg[i]) {
+                    hideTabContent(0);
+                    showTabContent(index);
                     break;
                 }
             }
-        }
+        });
     });
-    
-    
+        
     
     // Tab 2
 
@@ -239,13 +235,14 @@ window.addEventListener('DOMContentLoaded', function(){
     // Tab for balcon
     let balconIcons = document.querySelectorAll('.balcon_icons'),
         balconImg = document.querySelectorAll('.balcon_img'),
-        balconbigImg = document.querySelectorAll('.balconbig_img')
+        balconbigImg = document.querySelectorAll('.balconbig_img');
 
 
         function hideCalc(a) {
             for (let i = a; i < balconbigImg.length; i++) {
                 balconbigImg[i].classList.remove('showb');
                 balconbigImg[i].classList.add('hide');
+                balconImg[i].style.width = '20%';
             }
         }
         hideCalc(1);
@@ -254,6 +251,7 @@ window.addEventListener('DOMContentLoaded', function(){
             if (balconbigImg[b].classList.contains('hide')) {
                 balconbigImg[b].classList.remove('hide');
                 balconbigImg[b].classList.add('showb');
+                balconImg[b].style.width = '30%';
             }
         }
 
@@ -280,23 +278,19 @@ window.addEventListener('DOMContentLoaded', function(){
             popupCaclEndClose = document.querySelector('.popup_calc_end_close');
 
             // Проверка пустых полей ширины и высоты
-            function checkInput() {
             
-                setInterval(function () {
-                if (inputWidth.value == '' || inputHeight.value == '' || inputWidth.value == 0 || inputHeight.value == 0) {
-                    popupBtnCalc.setAttribute('disabled', 'true');
-                } else {
-                    popupBtnCalc.removeAttribute('disabled', 'true');
-                }
-    
-                }, 0);
-            }
-            checkInput();
+                popupBtnCalc.addEventListener('click', function () {                
+                    
+                    if (inputWidth.value == '' || inputHeight.value == '' || inputWidth.value == 0 || inputHeight.value == 0) {
+                        alert('Введите ширину и высоту!');
+                    } else {
+                        popupCalc.style.display ='none';
+                        popupCalcProfile.style.display ='block';
+                    }             
+                
+                }); 
             
-            popupBtnCalc.addEventListener('click', function(){
-                popupCalc.style.display ='none';
-                popupCalcProfile.style.display ='block';
-            });
+           
             // Функция очистки input & check
             let clear = function () {
                 inputWidth.value = '';
@@ -351,7 +345,7 @@ window.addEventListener('DOMContentLoaded', function(){
         statusM = document.createElement('div'),
         sum = document.getElementById('sum'),
         selectType = document.getElementById('view_type'),
-        formData = new FormData();
+        formDate = new FormData();
 
         statusM.classList.add('status');
 
@@ -362,25 +356,25 @@ window.addEventListener('DOMContentLoaded', function(){
         };
                     
         popupBtnCalc.addEventListener('click', function(){
-            formData.append('Width: ', inputWidth.value);
-            formData.append('Height: ', inputHeight.value);
+            formDate.append('Width: ', inputWidth.value);
+            formDate.append('Height: ', inputHeight.value);
         });
 
         popupCalcBtn.addEventListener('click', function(){
             if(popupCheck[0].checked === true) {
-                formData.append('Glazing - ', 'Cold');
+                formDate.append('Glazing - ', 'Cold');
             } else if (popupCheck[1].checked === true) {
-                formData.append('Glazing - ', 'Warm');
+                formDate.append('Glazing - ', 'Warm');
             }
         });
 
         sum.addEventListener('click', function(){
-            formData.append("Name ", popupCalcFormInput[0].value);
-            formData.append("Phone ", popupCalcFormInput[1].value);
+            formDate.append("Name ", popupCalcFormInput[0].value);
+            formDate.append("Phone ", popupCalcFormInput[1].value);
         });
 
         selectType.addEventListener('change', function(){
-            formData.append("Glazing type ", this.options[this.selectedIndex].innerHTML);
+            formDate.append("Glazing type ", this.options[this.selectedIndex].innerHTML);
         });
 
         // Send form for calc_end
@@ -412,7 +406,7 @@ window.addEventListener('DOMContentLoaded', function(){
                             };
         
                             let obj = {};
-                            formData.forEach(function(value, key){
+                            formDate.forEach(function(value, key){
                                 obj[key] = value;
                             });
                             let json = JSON.stringify(obj);
@@ -421,7 +415,7 @@ window.addEventListener('DOMContentLoaded', function(){
                         });
                     }
         
-                    postData(formData)
+                    postData(formDate)
                         .then(() => statusM.innerHTML = text.loading)
                         .then(() => statusM.innerHTML = text.success)
                         .catch(() => statusM.innerHTML = text.failure)
@@ -444,16 +438,15 @@ window.addEventListener('DOMContentLoaded', function(){
 
     // Timer
 
-    let deadline = '2019-11-05';
+    let deadline = '2018-11-07';
 
     function getTimeRemaining(endtime){
-        let t = Date.parse(endtime) - Date.parse(new Date()),
+        let newestData = new Date().getTimezoneOffset(),
+            t = Date.parse(endtime) - Date.parse(new Date()) + (newestData * 60000),
             seconds = Math.floor((t/1000)%60),
             minutes = Math.floor((t/1000/60)%60),
-            // hours = Math.floor((t/(1000*60*60))),
             hours = Math.floor((t/(1000*60*60) % 24)),
-            days = Math.floor(t/(1000*60*60*24));
-        
+            days = Math.floor(t/(1000*60*60*24)); 
             return {
                 'total': t,
                 'hours': hours,
@@ -475,7 +468,7 @@ window.addEventListener('DOMContentLoaded', function(){
             hours.textContent = ('0' + t.hours).slice(-2);
             minutes.textContent = ('0' + t.minutes).slice(-2);
             seconds.textContent = ('0' + t.seconds).slice(-2);
-            days.textContent = t.days;
+            days.textContent = ('0' + t.days).slice(-2);
 
             if(t.total <= 0) {
                 clearInterval(timeInterval);
