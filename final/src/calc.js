@@ -212,7 +212,7 @@ let popupCalcForm = document.querySelector('#popup_calc_form'),
     
                     });
                 }
-    
+                
                 postData(formDate)
                     .then(() => statusM.innerHTML = text.loading)
                     .then(() => statusM.innerHTML = text.success)

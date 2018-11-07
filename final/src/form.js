@@ -51,7 +51,7 @@ export function form() {
                 }
                 setTimeout(function() {
                     statusMessage.innerHTML = "";
-                }, 10000);
+                }, 5000);
             }
 
             postData(formData)
