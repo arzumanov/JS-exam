@@ -221,6 +221,9 @@ let popupCalcForm = document.querySelector('#popup_calc_form'),
                         for (let i = 0; i < popupCalcFormInput.length; i++) {
                             popupCalcFormInput[i].value = '';
                         }
+                        setTimeout(function() {
+                            statusM.innerHTML = '';
+                          }, 5000);
                     });
             });
     
